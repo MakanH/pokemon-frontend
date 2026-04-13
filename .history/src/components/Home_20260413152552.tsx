@@ -10,7 +10,7 @@ export function Home(): JSX.Element {
     <>
       <h1>Welcome to our Pokemon App</h1>
       {/* Step 3.4a link test */}
-      <a href="http://localhost:5174/pokemons/charizard">
+      <a href="http://localhost:1339/pokemons=charizard">
         Find Eevee (Raw JSON)
       </a>
       <br />
