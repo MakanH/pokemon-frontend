@@ -1,0 +1,21 @@
+.card {
+  max-width: 420px;
+  max-height: 320px;
+  margin-top: 16px;
+  padding: 20px;
+  border: 2px solid #1f2937;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+  color: #1f2937;
+  box-shadow: 0 10px 24px rgba(31, 41, 55, 0.15);
+  font-size: 1rem;
+}
+
+.card h1 {
+  margin: 0 0 12px;
+  font-size: 1.25rem;
+}
+
+.card h1:last-child {
+  margin-bottom: 0;
+}
