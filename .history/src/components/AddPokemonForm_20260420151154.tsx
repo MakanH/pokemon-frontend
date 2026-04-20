@@ -42,7 +42,11 @@ export function AddPokemonForm({
       <input type="text" placeholder="Type..." ref={typeRef} required />
 
       <label htmlFor="image">Image URL (optional)</label>
-      <input type="text" placeholder="Image URL..." ref={imageRef} />
+      <input
+        type="text"
+        placeholder="Image URL..."
+        ref={imageRef}
+      />
 
       <button type="submit">Add Pokemon</button>
     </form>
