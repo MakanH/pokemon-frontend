@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import type { SubmitEvent, JSX } from "react";
+import { useNavigate } from "react-router-dom";
 import type { Pokemon } from "./Pokemon.tsx";
 
 export function AddPokemonForm({
@@ -7,6 +8,7 @@ export function AddPokemonForm({
 }: {
   setAdded: (val: Pokemon) => void;
 }): JSX.Element {
+  const navigate = useNavigate();
   const nameRef = useRef<HTMLInputElement>(null);
   const typeRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLInputElement>(null);
@@ -25,12 +27,42 @@ export function AddPokemonForm({
         "Content-type": "application/json; charset=UTF-8",
       },
     };
-    const response = await fetch(
-      "http://localhost:1339/pokemons",
-      requestOptions,
-    );
-    const result = await response.json();
-    setAdded(result);
+    try {
+      const response = await fetch(
+        "http://localhost:1339/pokemons",
+        requestOptions,
+      );
+      const result = await response.json();
+
+      if (!response.ok) {
+        if (response.status >= 400 && response.status < 500) {
+          navigate("/usererror", {
+            state: {
+              errorMessage:
+                result.errorMessage ||
+                "Validation error trying to add pokemon.",
+            },
+          });
+        } else {
+          navigate("/systemerror", {
+            state: {
+              errorMessage:
+                result.errorMessage || "System error trying to add pokemon.",
+            },
+          });
+        }
+        return;
+      }
+
+      setAdded(result);
+    } catch {
+      navigate("/systemerror", {
+        state: {
+          errorMessage:
+            "Could not reach the back-end server while adding pokemon.",
+        },
+      });
+    }
   };
 
   return (
