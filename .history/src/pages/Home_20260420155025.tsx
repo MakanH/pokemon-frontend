@@ -9,8 +9,7 @@ import { UpdatePokemon } from "../components/UpdatePokemon.tsx";
 /** Main component for our home page */
 export function Home(): JSX.Element {
   const { state } = useLocation();
-  const errorMessage = (state as { errorMessage?: string } | null)
-    ?.errorMessage;
+  const errorMessage = (state as { errorMessage?: string } | null)?.errorMessage;
 
   return (
     <>

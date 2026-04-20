@@ -14,16 +14,6 @@ export function SinglePokemon(): JSX.Element {
     });
     const result = await response.json();
 
-    if (!response.ok) {
-      setPokemon({
-        _id: 0,
-        name: "Eevee",
-        type: "normal",
-        image: "/images/eevee.png",
-      });
-      return;
-    }
-
     let image = result.image as string | undefined;
 
     if (!image && result.name) {

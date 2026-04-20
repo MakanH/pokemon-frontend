@@ -9,20 +9,10 @@ export function SinglePokemon(): JSX.Element {
 
   /* Handler function to fetch a pokemon and display the result. Result must be JSON format. */
   const callGetPokemon = async () => {
-    const response = await fetch("http://localhost:1339/pokemons/eevee", {
+    const response = await fetch("http://localhost:1339/pokemons?name=eevee", {
       method: "GET",
     });
     const result = await response.json();
-
-    if (!response.ok) {
-      setPokemon({
-        _id: 0,
-        name: "Eevee",
-        type: "normal",
-        image: "/images/eevee.png",
-      });
-      return;
-    }
 
     let image = result.image as string | undefined;
 

@@ -35,21 +35,27 @@ export function AddPokemonForm({
       const result = await response.json();
 
       if (!response.ok) {
-        navigate("/", {
-          state: {
-            errorMessage:
-              result.errorMessage ||
-              (response.status >= 400 && response.status < 500
-                ? "Validation error trying to add pokemon."
-                : "System error trying to add pokemon."),
-          },
-        });
+        if (response.status >= 400 && response.status < 500) {
+          navigate("/usererror", {
+            state: {
+              errorMessage:
+                result.errorMessage || "Validation error trying to add pokemon.",
+            },
+          });
+        } else {
+          navigate("/systemerror", {
+            state: {
+              errorMessage:
+                result.errorMessage || "System error trying to add pokemon.",
+            },
+          });
+        }
         return;
       }
 
       setAdded(result);
     } catch {
-      navigate("/", {
+      navigate("/systemerror", {
         state: {
           errorMessage:
             "Could not reach the back-end server while adding pokemon.",
